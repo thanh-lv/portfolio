@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lê Văn Thành — WordPress Developer Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --wp-blue: #21759B;
+      --wp-blue-light: #4398C6;
+      --navy: #0D1B2A;
+      --navy-mid: #1A2E42;
+      --slate: #2D4A63;
+      --white: #FFFFFF;
+      --off-white: #F4F8FB;
+      --text: #1E293B;
+      --text-muted: #64748B;
+      --border: #CBD5E1;
+      --accent: #0EA5E9;
+      --woo: #7F54B3;
+      --radius: 10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13, 27, 42, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      color: var(--white); font-size: 1.1rem;
+      letter-spacing: 0.01em;
+    }
+    .nav-logo span { color: var(--wp-blue-light); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.7); text-decoration: none;
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--wp-blue); color: var(--white);
+      padding: 0.45rem 1.1rem; border-radius: 6px;
+      font-size: 0.82rem; font-weight: 600;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--wp-blue-light); }
+
+    /* HERO */
+    .hero {
+      background: var(--navy);
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px 2rem 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -120px; right: -80px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(33,117,155,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: 'W';
+      position: absolute; bottom: -40px; right: 5%;
+      font-family: 'DM Serif Display', serif;
+      font-size: 320px; color: rgba(255,255,255,0.03);
+      line-height: 1; pointer-events: none; user-select: none;
+    }
+    .hero-inner {
+      max-width: 860px; margin: 0 auto; position: relative; z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(33,117,155,0.2); border: 1px solid rgba(67,152,198,0.4);
+      color: var(--wp-blue-light); padding: 0.35rem 0.9rem;
+      border-radius: 100px; font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .hero-badge::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--wp-blue-light); animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      color: var(--white); line-height: 1.15;
+      margin-bottom: 1.2rem; letter-spacing: -0.01em;
+    }
+    .hero h1 em {
+      font-style: italic; color: var(--wp-blue-light);
+    }
+    .hero-sub {
+      color: rgba(255,255,255,0.65); font-size: 1.05rem;
+      max-width: 580px; margin-bottom: 2rem; line-height: 1.7;
+    }
+    .hero-stats {
+      display: flex; gap: 2.5rem; margin-bottom: 2.5rem; flex-wrap: wrap;
+    }
+    .stat { }
+    .stat-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem; color: var(--white); line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.78rem; color: rgba(255,255,255,0.5);
+      letter-spacing: 0.04em; text-transform: uppercase; margin-top: 2px;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--wp-blue); color: var(--white);
+      padding: 0.75rem 1.6rem; border-radius: var(--radius);
+      text-decoration: none; font-weight: 600; font-size: 0.9rem;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover { background: var(--wp-blue-light); transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent; color: rgba(255,255,255,0.8);
+      padding: 0.75rem 1.6rem; border-radius: var(--radius);
+      text-decoration: none; font-weight: 500; font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
+
+    /* SECTION BASE */
+    section { padding: 80px 2rem; }
+    .container { max-width: 920px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--wp-blue);
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--navy); line-height: 1.2; margin-bottom: 1rem;
+    }
+    .section-desc {
+      color: var(--text-muted); font-size: 0.95rem;
+      max-width: 560px; line-height: 1.7; margin-bottom: 3rem;
+    }
+
+    /* WP SKILLS */
+    .skills-section { background: var(--off-white); }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .skill-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.2rem 1.4rem;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .skill-card:hover { border-color: var(--wp-blue); transform: translateY(-2px); }
+    .skill-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+    .skill-name {
+      font-weight: 600; font-size: 0.88rem; color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+    .skill-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; gap: 1.4rem; }
+    .project-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      display: grid; grid-template-columns: 1fr;
+      transition: box-shadow 0.2s, transform 0.15s;
+    }
+    .project-card:hover {
+      box-shadow: 0 8px 24px rgba(13,27,42,0.1);
+      transform: translateY(-2px);
+    }
+    .project-card.featured {
+      grid-template-columns: 1fr 1fr;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      border-color: var(--slate);
+    }
+    .project-body { padding: 1.6rem 1.8rem; }
+    .project-card.featured .project-body { padding: 2rem 2.2rem; }
+    .project-tags {
+      display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.8rem;
+    }
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.02em;
+      padding: 0.2rem 0.6rem; border-radius: 4px;
+      background: rgba(33,117,155,0.1); color: var(--wp-blue);
+      border: 1px solid rgba(33,117,155,0.2);
+    }
+    .tag.woo { background: rgba(127,84,179,0.1); color: var(--woo); border-color: rgba(127,84,179,0.2); }
+    .tag.acf { background: rgba(14,165,233,0.1); color: var(--accent); border-color: rgba(14,165,233,0.2); }
+    .project-card.featured .tag {
+      background: rgba(67,152,198,0.2); color: var(--wp-blue-light);
+      border-color: rgba(67,152,198,0.3);
+    }
+    .project-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem; margin-bottom: 0.5rem;
+      color: var(--navy);
+    }
+    .project-card.featured .project-name { color: var(--white); font-size: 1.4rem; }
+    .project-desc {
+      font-size: 0.85rem; color: var(--text-muted);
+      line-height: 1.65; margin-bottom: 1rem;
+    }
+    .project-card.featured .project-desc { color: rgba(255,255,255,0.65); }
+    .project-bullets {
+      list-style: none; margin-bottom: 1.2rem;
+    }
+    .project-bullets li {
+      font-size: 0.82rem; color: var(--text-muted);
+      padding: 0.2rem 0 0.2rem 1.1rem;
+      position: relative; line-height: 1.5;
+    }
+    .project-bullets li::before {
+      content: '→'; position: absolute; left: 0;
+      color: var(--wp-blue); font-size: 0.75rem;
+    }
+    .project-card.featured .project-bullets li { color: rgba(255,255,255,0.6); }
+    .project-card.featured .project-bullets li::before { color: var(--wp-blue-light); }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--wp-blue);
+      text-decoration: none; transition: gap 0.2s;
+    }
+    .project-link:hover { gap: 0.7rem; }
+    .project-card.featured .project-link { color: var(--wp-blue-light); }
+    .project-visual {
+      background: var(--slate);
+      display: flex; align-items: center; justify-content: center;
+      min-height: 220px; position: relative; overflow: hidden;
+    }
+    .project-visual-inner {
+      text-align: center; color: rgba(255,255,255,0.3);
+      font-size: 3rem;
+    }
+    .project-visual-url {
+      position: absolute; bottom: 1rem; left: 1rem; right: 1rem;
+      background: rgba(13,27,42,0.8); border-radius: 6px;
+      padding: 0.4rem 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; color: rgba(255,255,255,0.5);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    /* WP CAPABILITY SECTION */
+    .capability-section { background: var(--navy); }
+    .capability-section .section-title { color: var(--white); }
+    .capability-section .section-desc { color: rgba(255,255,255,0.55); }
+    .capability-section .section-label { color: var(--wp-blue-light); }
+    .capability-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px; background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); overflow: hidden;
+    }
+    .capability-item {
+      background: var(--navy-mid); padding: 1.4rem 1.6rem;
+      transition: background 0.2s;
+    }
+    .capability-item:hover { background: var(--slate); }
+    .cap-icon { font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .cap-title { font-size: 0.85rem; font-weight: 600; color: var(--white); margin-bottom: 0.25rem; }
+    .cap-desc { font-size: 0.75rem; color: rgba(255,255,255,0.45); line-height: 1.5; }
+
+    /* EXPERIENCE STRIP */
+    .exp-section { background: var(--off-white); }
+    .exp-list { display: grid; gap: 1rem; }
+    .exp-item {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.2rem 1.6rem;
+      display: flex; gap: 1.2rem; align-items: flex-start;
+    }
+    .exp-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--wp-blue); flex-shrink: 0; margin-top: 5px;
+    }
+    .exp-company { font-weight: 600; font-size: 0.9rem; color: var(--navy); }
+    .exp-role { font-size: 0.82rem; color: var(--text-muted); margin-top: 1px; }
+    .exp-date {
+      margin-left: auto; font-size: 0.78rem; color: var(--text-muted);
+      white-space: nowrap; flex-shrink: 0;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* CONTACT */
+    .contact-section {
+      background: linear-gradient(135deg, var(--wp-blue) 0%, #1A5C7A 100%);
+      text-align: center;
+    }
+    .contact-section .section-title { color: var(--white); }
+    .contact-section p { color: rgba(255,255,255,0.75); margin-bottom: 2rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .contact-link {
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+      color: var(--white); padding: 0.7rem 1.4rem; border-radius: 8px;
+      text-decoration: none; font-size: 0.85rem; font-weight: 500;
+      display: flex; align-items: center; gap: 0.5rem;
+      transition: background 0.2s;
+    }
+    .contact-link:hover { background: rgba(255,255,255,0.25); }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy); color: rgba(255,255,255,0.35);
+      text-align: center; padding: 1.5rem;
+      font-size: 0.75rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      .project-card.featured { grid-template-columns: 1fr; }
+      .project-visual { display: none; }
+      .nav-links { display: none; }
+      .hero-stats { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Lê Văn <span>Thành</span></div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#capabilities">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:levanthanh.dev@gmail.com" class="nav-cta">Hire me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Available for Remote Work</div>
+    <h1>WordPress Developer<br>with a <em>backend edge</em></h1>
+    <p class="hero-sub">
+      6+ years building business web applications — from custom WordPress themes and WooCommerce stores to Laravel APIs and React dashboards. Based in Hanoi, delivering for Japan, Singapore and beyond.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-number">6+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">4+</div>
+        <div class="stat-label">WordPress Projects</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Business Clients Served</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">710</div>
+        <div class="stat-label">TOEIC L&R Score</div>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View WordPress Work ↓</a>
+      <a href="https://linkedin.com/in/thanhlv2911" target="_blank" class="btn-ghost">LinkedIn →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div class="container">
+    <div class="section-label">Toolkit</div>
+    <h2 class="section-title">WordPress Expertise</h2>
+    <p class="section-desc">From blank theme to live production — covering the full WordPress stack that client projects actually need.</p>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">🎨</div>
+        <div class="skill-name">Custom Theme Development</div>
+        <div class="skill-desc">Built from scratch using PHP, HTML/CSS, jQuery — no page-builder dependency, clean and maintainable code.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🛒</div>
+        <div class="skill-name">WooCommerce</div>
+        <div class="skill-desc">Product catalogs, checkout flows, payment integration, order management, and custom WooCommerce templates.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🔌</div>
+        <div class="skill-name">Plugin Development & ACF</div>
+        <div class="skill-desc">Custom plugin logic, Advanced Custom Fields (ACF), and extending third-party plugins without breaking updates.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⚙️</div>
+        <div class="skill-name">Server & Hosting</div>
+        <div class="skill-desc">WordPress deployment on AWS EC2, domain/DNS, SSL configuration, backups, caching, and performance optimization.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🔒</div>
+        <div class="skill-name">Security & Maintenance</div>
+        <div class="skill-desc">Hardening, plugin audits, malware scanning, update management, and ongoing site maintenance.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🚀</div>
+        <div class="skill-name">Performance Optimisation</div>
+        <div class="skill-desc">Caching (Redis/Valkey), image optimisation, query tuning, CDN setup, and Core Web Vitals improvement.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="padding: 80px 2rem;">
+  <div class="container">
+    <div class="section-label">Portfolio</div>
+    <h2 class="section-title">WordPress Projects</h2>
+    <p class="section-desc">A selection of WordPress sites built or maintained across e-commerce, lead generation, and content management.</p>
+
+    <div class="projects-grid">
+
+      <!-- IEE Du Hoc - Featured -->
+      <div class="project-card featured">
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">WordPress</span>
+            <span class="tag">Custom Theme</span>
+            <span class="tag acf">ACF</span>
+            <span class="tag">PHP</span>
+          </div>
+          <div class="project-name">IEE Du học — Education Consulting</div>
+          <p class="project-desc">A WordPress website for an international education consulting center, supporting course discovery, blog publishing, and student lead capture.</p>
+          <ul class="project-bullets">
+            <li>Built custom WordPress theme from scratch — no page builder</li>
+            <li>Implemented ACF-powered content blocks for flexible page layouts</li>
+            <li>Developed lead-capture forms with admin notification workflows</li>
+            <li>Configured DNS, SSL, hosting deployment, and backups</li>
+          </ul>
+          <a href="https://ieeduhoc.edu.vn" target="_blank" class="project-link">View live site →</a>
+        </div>
+        <div class="project-visual">
+          <div class="project-visual-inner">🎓</div>
+          <div class="project-visual-url">ieeduhoc.edu.vn</div>
+        </div>
+      </div>
+
+      <!-- Nguyen Ninh -->
+      <div class="project-card featured">
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">WordPress</span>
+            <span class="tag woo">WooCommerce</span>
+            <span class="tag">Custom Theme</span>
+            <span class="tag">PHP</span>
+          </div>
+          <div class="project-name">Bánh cốm Nguyên Ninh — E-Commerce</div>
+          <p class="project-desc">Online store for a century-old traditional Vietnamese cake brand, enabling product browsing and order placement for the first time in their history.</p>
+          <ul class="project-bullets">
+            <li>Built custom WordPress + WooCommerce theme reflecting brand heritage</li>
+            <li>Configured product catalog, order flows, and customer email automation</li>
+            <li>Implemented responsive layouts optimised for mobile shoppers</li>
+            <li>Handled full deployment: domain, DNS, SSL, and ongoing maintenance</li>
+          </ul>
+          <a href="https://nguyenninhofficial.com.vn" target="_blank" class="project-link">View live site →</a>
+        </div>
+        <div class="project-visual">
+          <div class="project-visual-inner">🛒</div>
+          <div class="project-visual-url">nguyenninhofficial.com.vn</div>
+        </div>
+      </div>
+
+      <!-- 2-col grid for smaller projects -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem;">
+
+        <!-- Remote Office -->
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">WordPress</span>
+              <span class="tag">PHP</span>
+              <span class="tag">jQuery/Ajax</span>
+            </div>
+            <div class="project-name">Remote Office Japan</div>
+            <p class="project-desc">WordPress platform for managing office-leasing operations across Japan. Custom admin pages, backend workflows, and plugin development for a team of 6.</p>
+            <ul class="project-bullets">
+              <li>Custom themes, plugins, and PHP backend logic</li>
+              <li>Admin management pages for office and leasing data</li>
+              <li>Delivered for Japanese market client via Newwave Solutions</li>
+            </ul>
+            <span style="font-size:0.78rem; color: var(--text-muted);">Client project — NDA</span>
+          </div>
+        </div>
+
+        <!-- SGC Soccer -->
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">WordPress</span>
+              <span class="tag woo">WooCommerce</span>
+              <span class="tag">PHP</span>
+            </div>
+            <div class="project-name">SGC Soccer — Merchandise Store</div>
+            <p class="project-desc">WooCommerce-powered online store for a soccer club selling jerseys and merchandise — built during Newwave Solutions in 2022.</p>
+            <ul class="project-bullets">
+              <li>Custom WordPress theme and WooCommerce setup</li>
+              <li>Product catalog, cart, and checkout configuration</li>
+              <li>End-to-end purchasing workflow implementation</li>
+            </ul>
+            <span style="font-size:0.78rem; color: var(--text-muted);">Client project — NDA</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- GI Software WP project -->
+      <div class="project-card">
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">WordPress</span>
+            <span class="tag">Custom Plugin</span>
+            <span class="tag">PHP / MySQL</span>
+          </div>
+          <div class="project-name">Internal Management System — GI Software</div>
+          <p class="project-desc">A WordPress-based management system serving 100+ active users at GI Software. Maintained and extended over 1.5 years as a full-time developer.</p>
+          <ul class="project-bullets">
+            <li>Custom theme and plugin development aligned with business workflows</li>
+            <li>Backend PHP logic for data management and user operations</li>
+            <li>Bug fixing, feature additions, and long-term system maintenance</li>
+            <li>Improved system stability and reduced recurring issues</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section class="capability-section" id="capabilities">
+  <div class="container">
+    <div class="section-label">What I can do for you</div>
+    <h2 class="section-title">Full WordPress Support</h2>
+    <p class="section-desc">Beyond building — I handle the ongoing operational work that keeps WordPress sites fast, secure, and reliable.</p>
+    <div class="capability-grid">
+      <div class="capability-item">
+        <div class="cap-icon">🌐</div>
+        <div class="cap-title">Site Setup & Deployment</div>
+        <div class="cap-desc">Hosting, domain, DNS records, SSL, email config, and WordPress installation from scratch.</div>
+      </div>
+      <div class="capability-item">
+        <div class="cap-icon">🎯</div>
+        <div class="cap-title">Theme & Plugin Work</div>
+        <div class="cap-desc">Custom theme development, Elementor customisation, plugin installation, configuration, and troubleshooting.</div>
+      </div>
+      <div class="capability-item">
+        <div class="cap-icon">🛡️</div>
+        <div class="cap-title">Security & Backups</div>
+        <div class="cap-desc">Security hardening, automated backups, malware scanning, and disaster recovery setup.</div>
+      </div>
+      <div class="capability-item">
+        <div class="cap-icon">⚡</div>
+        <div class="cap-title">Performance & SEO</div>
+        <div class="cap-desc">Caching, image compression, CDN, Core Web Vitals optimisation, and Yoast/RankMath configuration.</div>
+      </div>
+      <div class="capability-item">
+        <div class="cap-icon">🎨</div>
+        <div class="cap-title">UX & Layout</div>
+        <div class="cap-desc">Page layout improvements, user journey optimisation, wireframing, and Figma-to-WordPress implementation.</div>
+      </div>
+      <div class="capability-item">
+        <div class="cap-icon">🎫</div>
+        <div class="cap-title">Ongoing Support</div>
+        <div class="cap-desc">Responsive ticket-based support, content updates, plugin updates, and client request management.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="exp-section" id="experience">
+  <div class="container">
+    <div class="section-label">Background</div>
+    <h2 class="section-title">Work History</h2>
+    <p class="section-desc">6+ years across product companies and agencies, delivering for international clients.</p>
+    <div class="exp-list">
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div>
+          <div class="exp-company">3AC — Full-stack Developer</div>
+          <div class="exp-role">B2B SaaS platform (ISO/P-Mark) · PHP, Laravel, Vue.js · 500+ business clients</div>
+        </div>
+        <div class="exp-date">2025 – 2026</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div>
+          <div class="exp-company">Newwave Solutions — Backend Developer (PHP/Laravel)</div>
+          <div class="exp-role">International projects for Japan & Singapore · WordPress, Laravel, React · Multiple clients</div>
+        </div>
+        <div class="exp-date">2021 – 2024</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div>
+          <div class="exp-company">GI Software — PHP/Laravel Developer</div>
+          <div class="exp-role">WordPress, PHP/Laravel systems · 1,600+ combined users across 3 projects</div>
+        </div>
+        <div class="exp-date">2019 – 2021</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <h2 class="section-title">Let's work together</h2>
+    <p>Available for remote full-time WordPress roles. Responsive during business hours (UTC+7, Hanoi).</p>
+    <div class="contact-links">
+      <a href="mailto:levanthanh.dev@gmail.com" class="contact-link">✉️ levanthanh.dev@gmail.com</a>
+      <a href="https://linkedin.com/in/thanhlv2911" target="_blank" class="contact-link">💼 LinkedIn</a>
+      <a href="https://github.com/thanh-lv" target="_blank" class="contact-link">⌥ GitHub</a>
+      <a href="tel:+84964337489" class="contact-link">📞 +84 964 337 489</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Lê Văn Thành · WordPress Developer · Hanoi, Vietnam · levanthanh.dev@gmail.com</p>
+</footer>
+
+</body>
+</html>
