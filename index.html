@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lê Văn Thành — WordPress Developer Portfolio</title>
+    <title>Le Van Thanh — WordPress Developer Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
@@ -527,6 +527,223 @@
         line-height: 1.5;
       }
 
+      /* CUSTOM PLUGIN SECTION */
+      .plugin-section {
+        background: linear-gradient(
+          160deg,
+          #0f1b2d 0%,
+          #162a45 50%,
+          #1a3150 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+      .plugin-section::before {
+        content: "";
+        position: absolute;
+        top: -100px;
+        left: -100px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+          circle,
+          rgba(33, 117, 155, 0.12) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .plugin-section::after {
+        content: "{ }";
+        position: absolute;
+        bottom: -20px;
+        right: 5%;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 200px;
+        color: rgba(255, 255, 255, 0.02);
+        pointer-events: none;
+        user-select: none;
+      }
+      .plugin-section .section-label {
+        color: var(--wp-blue-light);
+      }
+      .plugin-section .section-title {
+        color: var(--white);
+      }
+      .plugin-section .section-desc {
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .plugin-intro {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+        margin-bottom: 3rem;
+        align-items: start;
+      }
+      .plugin-intro-text {
+        position: relative;
+        z-index: 1;
+      }
+      .plugin-intro-code {
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius);
+        padding: 1.4rem 1.6rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.72rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.6);
+        overflow-x: auto;
+        position: relative;
+      }
+      .plugin-intro-code::before {
+        content: "plugin-header.php";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 0.4rem 1rem;
+        font-size: 0.65rem;
+        color: rgba(255, 255, 255, 0.35);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: var(--radius) var(--radius) 0 0;
+      }
+      .plugin-intro-code pre {
+        margin-top: 1.4rem;
+        white-space: pre;
+      }
+      .plugin-intro-code .code-comment {
+        color: rgba(255, 255, 255, 0.3);
+      }
+      .plugin-intro-code .code-keyword {
+        color: #c792ea;
+      }
+      .plugin-intro-code .code-function {
+        color: #82aaff;
+      }
+      .plugin-intro-code .code-string {
+        color: #c3e88d;
+      }
+      .plugin-intro-code .code-variable {
+        color: #f78c6c;
+      }
+      .plugin-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+        gap: 1rem;
+        position: relative;
+        z-index: 1;
+      }
+      .plugin-card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius);
+        padding: 1.6rem;
+        transition:
+          border-color 0.25s,
+          background 0.25s,
+          transform 0.2s;
+        position: relative;
+      }
+      .plugin-card:hover {
+        border-color: rgba(67, 152, 198, 0.4);
+        background: rgba(255, 255, 255, 0.06);
+        transform: translateY(-3px);
+      }
+      .plugin-card-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        background: rgba(33, 117, 155, 0.15);
+        border: 1px solid rgba(67, 152, 198, 0.25);
+      }
+      .plugin-card-icon.woo-icon {
+        background: rgba(127, 84, 179, 0.15);
+        border-color: rgba(127, 84, 179, 0.3);
+      }
+      .plugin-card-icon.acf-icon {
+        background: rgba(14, 165, 233, 0.15);
+        border-color: rgba(14, 165, 233, 0.25);
+      }
+      .plugin-card-icon.api-icon {
+        background: rgba(246, 135, 18, 0.12);
+        border-color: rgba(246, 135, 18, 0.25);
+      }
+      .plugin-card-title {
+        font-weight: 600;
+        font-size: 0.92rem;
+        color: var(--white);
+        margin-bottom: 0.4rem;
+      }
+      .plugin-card-desc {
+        font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.5);
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+      .plugin-card-features {
+        list-style: none;
+      }
+      .plugin-card-features li {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.45);
+        padding: 0.2rem 0 0.2rem 1.2rem;
+        position: relative;
+        line-height: 1.5;
+      }
+      .plugin-card-features li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--wp-blue-light);
+        font-size: 0.7rem;
+        font-weight: 700;
+      }
+      .plugin-cta-row {
+        margin-top: 2.5rem;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+      .plugin-cta-row p {
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+      }
+      .plugin-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--wp-blue);
+        color: var(--white);
+        padding: 0.7rem 1.5rem;
+        border-radius: var(--radius);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.85rem;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+      }
+      .plugin-cta-btn:hover {
+        background: var(--wp-blue-light);
+        transform: translateY(-1px);
+      }
+
+      @media (max-width: 700px) {
+        .plugin-intro {
+          grid-template-columns: 1fr;
+        }
+        .plugin-intro-code {
+          display: none;
+        }
+      }
+
       /* EXPERIENCE STRIP */
       .exp-section {
         background: var(--off-white);
@@ -636,10 +853,11 @@
   <body>
     <!-- NAV -->
     <nav>
-      <div class="nav-logo">Lê Văn <span>Thành</span></div>
+      <div class="nav-logo">Le Van <span>Thanh</span></div>
       <ul class="nav-links">
         <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#plugins">Plugins</a></li>
         <li><a href="#capabilities">Services</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -805,17 +1023,13 @@
             </div>
             <div class="project-visual">
               <img
-                src="images/iee-screenshot.jpg"
+                src="./images/iee-screenshot.png"
                 alt="IEE Du học website screenshot"
                 style="
                   width: 100%;
                   height: 100%;
                   object-fit: cover;
                   object-position: top;
-                "
-                onerror="
-                  this.src =
-                    'https://image.thum.io/get/width/800/crop/500/https://ieeduhoc.edu.vn/'
                 "
               />
               <div class="project-visual-url">ieeduhoc.edu.vn</div>
@@ -863,7 +1077,7 @@
             </div>
             <div class="project-visual">
               <img
-                src="https://image.thum.io/get/width/800/crop/500/https://nguyenninhofficial.com.vn/"
+                src="./images/nguyen-ninh-screenshot.png"
                 alt="Bánh cốm Nguyên Ninh website screenshot"
                 style="
                   width: 100%;
@@ -877,6 +1091,72 @@
                 "
               />
               <div class="project-visual-url">nguyenninhofficial.com.vn</div>
+            </div>
+          </div>
+
+          <!-- 1st Class Homes -->
+          <div class="project-card featured">
+            <div class="project-body">
+              <div class="project-tags">
+                <span class="tag">WordPress</span>
+                <span class="tag">Custom Theme</span>
+                <span class="tag">Custom Plugin</span>
+                <span class="tag">PHP</span>
+                <span class="tag acf">Cronjob</span>
+              </div>
+              <div class="project-name">
+                1st Class Homes — Real Estate Agency
+              </div>
+              <p class="project-desc">
+                A WordPress website for a leading, licensed real estate agency in
+                Limassol, Cyprus. Features property listings, advanced search
+                filters, multi-language support, and interactive map integration.
+              </p>
+              <ul class="project-bullets">
+                <li>
+                  Developed custom WordPress theme tailored to luxury real estate
+                  branding
+                </li>
+                <li>
+                  Created custom plugin for property management, search
+                  filtering, and listing features
+                </li>
+                <li>
+                  Identified and fixed critical bugs across theme and plugin
+                  codebase
+                </li>
+                <li>
+                  Built data crawler to fetch property listings from external
+                  sources and sync automatically via cPanel scheduled cronjob
+                </li>
+                <li>
+                  Implemented responsive layouts for property browsing on all
+                  devices
+                </li>
+              </ul>
+              <a
+                href="https://www.1stclass-homes.com/en"
+                target="_blank"
+                class="project-link"
+                >View live site →</a
+              >
+            </div>
+            <div class="project-visual">
+              <img
+                src="./images/1st-screenshot.png"
+                alt="1st Class Homes website screenshot"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  object-position: top;
+                "
+                onerror="
+                  this.parentElement.innerHTML =
+                    '<div class=\'project-visual-inner\'>🏠</div>'
+                "
+              />
+              <div class="project-visual-url">1stclass-homes.com</div>
             </div>
           </div>
 
@@ -969,6 +1249,113 @@
               </ul>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CUSTOM PLUGIN DEVELOPMENT -->
+    <section class="plugin-section" id="plugins">
+      <div class="container">
+        <div class="plugin-intro">
+          <div class="plugin-intro-text">
+            <div class="section-label">Plugin Development</div>
+            <h2 class="section-title">Create or Custom Plugin</h2>
+            <p class="section-desc">
+              Need a feature that no existing plugin covers? I build custom
+              WordPress plugins from scratch — clean, maintainable, and built to
+              your exact business logic. From extending WooCommerce to creating
+              internal tools, I handle the full plugin lifecycle.
+            </p>
+          </div>
+          <div class="plugin-intro-code">
+            <pre><span class="code-comment">/**
+ * Plugin Name: Your Custom Plugin
+ * Description: Built to your spec.
+ * Version:     1.0.0
+ * Author:      Le Van Thanh
+ */</span>
+
+<span class="code-keyword">add_action</span>( <span class="code-string">'init'</span>, <span class="code-keyword">function</span>() {
+    <span class="code-function">register_post_type</span>( <span class="code-string">'product_review'</span>, [
+        <span class="code-string">'public'</span>  => <span class="code-variable">true</span>,
+        <span class="code-string">'label'</span>   => <span class="code-string">'Reviews'</span>,
+        <span class="code-string">'supports'</span> => [<span class="code-string">'title'</span>, <span class="code-string">'editor'</span>],
+    ]);
+});</pre>
+          </div>
+        </div>
+
+        <div class="plugin-grid">
+          <!-- Card 1 -->
+          <div class="plugin-card">
+            <div class="plugin-card-icon">🔌</div>
+            <div class="plugin-card-title">Custom Business Logic Plugin</div>
+            <p class="plugin-card-desc">
+              Bespoke plugins tailored to your workflow — custom post types,
+              admin pages, shortcodes, and business automation.
+            </p>
+            <ul class="plugin-card-features">
+              <li>Custom Post Types & Taxonomies</li>
+              <li>Admin dashboard pages & settings</li>
+              <li>Shortcodes & Gutenberg blocks</li>
+              <li>Database tables & CRUD operations</li>
+            </ul>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="plugin-card">
+            <div class="plugin-card-icon woo-icon">🛒</div>
+            <div class="plugin-card-title">WooCommerce Extensions</div>
+            <p class="plugin-card-desc">
+              Extend WooCommerce with custom checkout fields, pricing rules,
+              shipping logic, or payment gateway integrations.
+            </p>
+            <ul class="plugin-card-features">
+              <li>Custom checkout & cart modifications</li>
+              <li>Dynamic pricing & discount rules</li>
+              <li>Custom shipping calculations</li>
+              <li>Order workflow automation</li>
+            </ul>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="plugin-card">
+            <div class="plugin-card-icon api-icon">🔗</div>
+            <div class="plugin-card-title">API & Third-Party Integration</div>
+            <p class="plugin-card-desc">
+              Connect WordPress with external services — CRM, payment, email
+              marketing, or any REST/SOAP API.
+            </p>
+            <ul class="plugin-card-features">
+              <li>REST API endpoints & webhooks</li>
+              <li>CRM & email marketing sync</li>
+              <li>Payment gateway integration</li>
+              <li>Data import/export automation</li>
+            </ul>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="plugin-card">
+            <div class="plugin-card-icon acf-icon">⚙️</div>
+            <div class="plugin-card-title">Plugin Customization & Fixes</div>
+            <p class="plugin-card-desc">
+              Modify existing plugins to fit your needs — override behaviours,
+              add features, or fix compatibility issues without hacking core.
+            </p>
+            <ul class="plugin-card-features">
+              <li>Hooks & filters for safe overrides</li>
+              <li>Compatibility fixes & conflict resolution</li>
+              <li>Performance optimisation of existing plugins</li>
+              <li>Migration & update-safe modifications</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="plugin-cta-row">
+          <p>Have a plugin idea? Let's discuss your requirements.</p>
+          <a href="mailto:levanthanh.dev@gmail.com" class="plugin-cta-btn">
+            ✉️ Request a Custom Plugin
+          </a>
         </div>
       </div>
     </section>
@@ -1116,7 +1503,7 @@
 
     <footer>
       <p>
-        Lê Văn Thành · WordPress Developer · Hanoi, Vietnam ·
+        Le Van Thanh · WordPress Developer · Hanoi, Vietnam ·
         levanthanh.dev@gmail.com
       </p>
     </footer>
